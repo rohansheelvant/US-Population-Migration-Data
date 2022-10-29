@@ -1,0 +1,22 @@
+book_filename: "finalproj"
+output_dir: docs
+delete_merged_file: true
+edit: https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/%s
+view: https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/%s
+language:
+  ui:
+    chapter_name: "Chapter "
+    
+rmd_files: [
+  'index.Rmd',
+  '01-proposal.Rmd',
+  '02-data.Rmd',
+  '03-cleaning.Rmd',
+  '04-missing.Rmd',
+  '05-results.Rmd',
+  '06-interarctive.Rmd',
+  '07-conclusion.Rmd
+  ]
+  
+    
+before_chapter_script: "_common.R"
