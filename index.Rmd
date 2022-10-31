@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "U.S. Population Migration Data"
+author: "Laura De Los Santos, Rohan Sheelvant, Shrujan Varma Penmetsa "
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
