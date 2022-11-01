@@ -2,6 +2,10 @@ introduction
 proposal
 research-topic
 data-availability
+data-format-and-frequency
+scope
+data-quality
+references
 data
 sources
 cleaning-transformation
