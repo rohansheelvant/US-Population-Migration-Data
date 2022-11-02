@@ -6,4 +6,4 @@ site: bookdown::bookdown_site
 ---
 
 # Introduction
-
+In the United States of America, every citizen with an income above a certain amount is required to file his tax returns every year. The tax return of every individual has an address field, wherein the individual fills in his current address. This field can be leveraged to identify whether the individual; can be classified as a migrant or not. The individual could have migrated from one county to another within a state, from one state to another state, from the United States to a foreign location, or not migrated at all. The Internal Revenue Service (IRS) of the United States maintains a migration database by comparing the address field of an individual’s tax returns from two consecutive years. In this project, we propose to analyze the migration trends in the United States between the years 2015 and 2020.
