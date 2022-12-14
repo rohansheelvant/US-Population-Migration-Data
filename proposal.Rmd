@@ -1,12 +1,12 @@
-# 2. Proposal
+# Proposal
 
-## 2.1 Research topic
+## Research topic
 
 Our research topic is U.S. Population Migration patterns from 1990 until 2020. The goal is to explore the inflow and outflow of people between states and counties within the United States of America. With this data, there is an opportunity to create visualizations to detect patterns not only based on geographic location, but also across different age groups and income levels. 
 
 Data exploration and the analysis will be cemented on the Migration Data Users guide published by the Internal Revenue Service (IRS). 
 
-## 2.2 Data availability
+## Data availability
  
 The data is made available, collected, and maintained by the Internal Revenue Service (IRS), which is a bureau of the Department of the Treasury and one of the world's most efficient tax administrators. In the fiscal year 2020, the IRS collected almost $3.5 trillion in revenue and processed more than 240 million tax returns. The IRS maintains a lot of tax statistics data with respect to a variety of fields like business tax, individual tax, charities, etc.
 
