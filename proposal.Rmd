@@ -17,13 +17,13 @@ The migration data is derived from Form 1040 which is filed by residents of the 
 - Migrant return - same state - different county,
 - Migrant return - foreign
 
-#### Data Format and Frequency
+### Data Format and Frequency
 The data is publicly available as zipped Excel files (.xls) on the IRS website, composing multiple datasets for each fiscal year. To import the data, we need to download these files to our local computers and then upload to RStudio, which is the software we will use to conduct the analysis. 
 
 The IRS leverages the change in address on the Tax return from one year to another year to generate the migration data. 
 Despite the fact that the IRS provides help services for individuals and businesses looking at their tax returns, there is no contact information for data-related issues. As we encounter questions about the data, our approach will be to explore the online resources available on their website. 
 
-#### Scope
+### Scope
 The primary data that we will be analyzing is the summary of the migration flows within the states for 5 years from 2015 to 2020. This data contains the following fields:
 
 - The number of returns: which indicates the number of households that migrated.
@@ -42,14 +42,14 @@ In addition to this, in case we discover any particular trend or anomaly for a s
 - The number of individuals: which indicates the number of individuals that migrated.
 - Adjusted Gross income: which indicates the gross income after deducting certain adjustments like dividends, interests, etc..
 
-#### Data Quality
+### Data Quality
 It is important to note that the data does not represent the entire US population because there can be several individuals who might not be filing tax returns despite having an income. 
 
 Tax returns that are filled without a state code or with an incorrect state code are excluded. Similarly, if someone filed their tax return after September of a given year, it will not be included to maintain uniformity. Returns received in 2019 indicate the income earned in 2018, and returns received in 2020 indicate the income that was earned in 2019, and so on.
 
 The migration data cannot be compared to other data that relates to sources of income (SOI) because the migration data only compares the tax returns for 2 consecutive years. 
 
-#### References
+### References
 (https://www.irs.gov/about-irs/the-agency-its-mission-and-statutory-authority)
 (https://www.irs.gov/statistics/soi-tax-stats-data-by-geographic-area)
 (https://www.irs.gov/statistics/soi-tax-stats-migration-data)
