@@ -18,7 +18,7 @@ With these arrangements, the dimensions of our dataframe changed from having 5 d
 Our data contains different demographic information that were initially imported as "character" class type. In order to correctly process and visualize the different groups, we transformed these into factors. As we ensured that ordering was respected, if present, we also that the majority of groups did not follow a particular order. See breakdown below of this split:
 
 - Unordered factor(s): State code, State, State name, Status
-- Ordered factor(s): Age 
+- Ordered factor(s): Age, Gross Total Income(GTI)
 
 ```{r, warning = FALSE, results = 'hide', message = FALSE}
 # install.packages("mi")
@@ -49,6 +49,7 @@ for (i in factors_unordered){
 factors_ordered <- unique(df[,"Age"])
 
 df[,"Age"] <- factor(df[,"Age"], ordered=TRUE, levels=c("under 26", "26 under 35", "35 under 45","45 under 55","55 under 65", "65 and over"))
+df[,"GTI"] <- factor(df[,"GTI"], ordered=TRUE, levels=c("$1 under $10,000", "$10,000 under $25,000", "$25,000 under $50,000", "$50,000 under $75,000", "$75,000 under $100,000", "$100,000 under $200,000", "$200,000 or more"))
 ```
 
 ## Missing value analysis
