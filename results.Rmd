@@ -8,6 +8,8 @@
 # install.packages("naniar")
 # install.packages("vcdExtra")
 #install.packages("ggalluvial")
+#install.packages("maps")
+#install.packages("mapproj")
 library(datasets) 
 library(ggplot2) 
 library(dplyr) 
@@ -19,9 +21,103 @@ library(plyr)
 library(naniar)
 library(vcdExtra)
 library(ggalluvial)
+library (maps)
+library (mapproj)
 ```
 
 ## Migration of Individuals
+
+```{r}
+#We will now read the file
+mig_data <- read.csv("df.csv")
+
+
+#import the state data
+states <- map_data("state")
+
+#convert the data to lower case
+mig_data$State_name <- tolower(mig_data$State_name)
+states$region <- tolower(states$region)
+
+#Change column name
+colnames(states)[5] <- "State_name"
+#Merging
+states_merge <- merge(mig_data , states , sort = FALSE , by = "State_name")
+
+#filtering out data
+df <- states_merge %>% filter(Status == "Outflow")
+df$AGI_Year1 <- as.numeric(df$AGI_Year1) / 1000
+df0 <- df %>% filter(Age == "under 26")
+df1 <- df %>% filter(Age == "26 under 35")
+df2 <- df %>% filter(Age == "35 under 45")
+df3 <- df %>% filter(Age == "45 under 55")
+df4 <- df %>% filter(Age == "65 and over")
+df5 <- df %>% filter(Age == "55 under 65")
+
+g0<-ggplot(df0, aes (long, lat)) + geom_polygon(aes(group=group, fill= AGI_Year1))+ scale_fill_continuous(low = "cadetblue", high = "blue") +coord_map ()
+g0 <- g0 + facet_wrap(~factor(Year))
+g0 <- g0 + labs(x="Longitude", y="Latitude", title=" Avergae Gross Income vs  Region (Under 26)") + labs(fill='AGI(USD in millions)')
+g0
+```
+
+
+Since the data set is quite large, we have considered a subset for the analysis of the Average gross income of the states for the migrants who have migrated out of the state over all the age groups:
+
+
+For the age group under 26, we can observe that the Average gross income of the migrants has increased in the states of California, New York, and Texas with Texas recording the biggest increase in 2020.
+
+```{r}
+g1<-ggplot(df1, aes (long, lat)) + geom_polygon(aes(group=group, fill= AGI_Year1))+ scale_fill_continuous(low = "cadetblue", high = "blue") +coord_map ()
+g1 <- g1 + facet_wrap(~factor(Year))
+g1 <- g1 + labs(x="Longitude", y="Latitude", title=" Avergae Gross Income vs  Region (Age 26-35)") + labs(fill='AGI(USD in millions)')
+g1
+```
+
+
+For the age group of individuals between 26 and 35, we can observe that the Average gross income of the migrants has increased in the states of California, New York, and Texas from 2016 to 2017 but there has been a decrease in California and Texas from 2017 onwards. The AGI of New York for this category has increased continuously over the years from 2016 to 2020.
+
+```{r}
+g2<-ggplot(df2, aes (long, lat)) + geom_polygon(aes(group=group, fill= AGI_Year1))+ scale_fill_continuous(low = "cadetblue", high = "blue")+coord_map ()
+g2 <- g2 + facet_wrap(~factor(Year))
+g2 <- g2 + labs(x="Longitude", y="Latitude", title=" Avergae Gross Income vs  Region (Age 35-45)") + labs(fill='AGI(USD in millions)')
+g2
+```
+
+
+For the age group of individuals between 35 and 45, we can observe that the Average gross income of the migrants has decreased over the years in the states of California with Texas recording similar figures over the years. From the graph, we can see that there has been a sudden increase in the average gross income from 2019 to 2020.
+
+```{r}
+g3<-ggplot(df3, aes (long, lat)) + geom_polygon(aes(group=group, fill= AGI_Year1))+ scale_fill_continuous(low = "cadetblue", high = "blue") +coord_map ()
+g3 <- g3 + facet_wrap(~factor(Year))
+g3 <- g3 + labs(x="Longitude", y="Latitude", title=" Avergae Gross Income vs  Region (Age 45-55)") + labs(fill='AGI(USD in millions)')
+g3
+```
+
+
+For the age group of individuals between 45 and 55, we can observe that the Average gross income of the migrants has decreased over the years in the states of California with Texas recording similar figures until 2019 and then dropping in 2020. In this category, we can also observe that Illinois is also a significant contributor over other states. From the graph, we can see that there has been an incremental increase in the average gross income from 2018 to 2020
+
+```{r}
+g4<-ggplot(df4, aes (long, lat)) + geom_polygon(aes(group=group, fill= AGI_Year1))+ scale_fill_continuous(low = "cadetblue", high = "blue") +coord_map ()
+g4 <- g4 + facet_wrap(~factor(Year))
+g4 <- g4 + labs(x="Longitude", y="Latitude", title=" Avergae Gross Income vs  Region (Age 55-65)") + labs(fill='AGI(USD in millions)')
+g4 <- g4 + theme(legend.key.size = unit(0.7, 'cm'))
+g4
+```
+
+
+For the age group of individuals between 55 and 65, we can observe that Florida has a relatively high average gross income as compared to other states. New York is another state that has a relatively high average gross income.
+
+```{r}
+g5<-ggplot(df3, aes (long, lat)) + geom_polygon(aes(group=group, fill= AGI_Year1))+ scale_fill_continuous(low = "cadetblue", high = "blue") +coord_map ()
+g5 <- g5 + facet_wrap(~factor(Year))
+g5 <- g5 + labs(x="Longitude", y="Latitude", title=" Avergae Gross Income vs  Region (Age 65+)") + labs(fill='AGI(USD in millions)')
+g5 <- g5 + theme(legend.key.size = unit(0.7, 'cm'))
+g5
+```
+
+
+For the age group of individuals who are 65 years and above, we can observe that the Average gross income of the migrants has decreased over the years in the states of California with Texas recording similar figures over the years and then dropping in 2020. From the graph, we can see that there has been an incremental increase in the average gross income from 2019 to 2020.
+
 
 ```{r, echo=FALSE, warning=FALSE}
 df <- read.csv("migration_data/df_preprocessed.csv")
