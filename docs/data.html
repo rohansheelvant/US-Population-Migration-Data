@@ -85,7 +85,10 @@
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#missing-value-analysis"><i class="fa fa-check"></i><b>3.3</b> Missing value analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>4</b> Results</a></li>
-<li class="chapter" data-level="5" data-path="interactvive-component.html"><a href="interactvive-component.html"><i class="fa fa-check"></i><b>5</b> Interactvive component</a></li>
+<li class="chapter" data-level="5" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>5</b> Interactive component</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="interactive-component.html"><a href="interactive-component.html#u.s.-migration-2019-2020"><i class="fa fa-check"></i><b>5.1</b> U.S. Migration 2019-2020</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -113,9 +116,23 @@
 </div>
 <div id="cleaning-transformation" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Cleaning / transformation<a href="data.html#cleaning-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For this process, we had to change the structure of the data as it was presented as an .xlsx file with different groups under several layers of merged cells. Using the tidy approach of “one variable per column and one observation per row”, we turned 143 columns into 11, while keeping the core information intact.</p>
+<p>Excluding demographic data, our dataset had four core columns of information: number of returns, number of individuals, AGI 1 and AGI 2. These were repeated for each each age group and migration flow status combination. Through the data cleaning and transformation process, we created new columns to flag Age and Migration Status, instead of having separate sections of the file for each. This allowed us to append rows horizontally instead of vertically. Similarly, instead of having a different dataset per year, we collapsed these into one by creating a “Year” column into the main dataframe for the 5 years that we will be evaluating.</p>
+<p>The “Total” group was also removed as it was occupying unnecessary space and becoming confusing when extracting summary statistics in R as it would have incorrectly inflated these metrics. We took a similar approach where State was labeled as “Total”.</p>
+<p>With these arrangements, the dimensions of our dataframe changed from having 5 datasets 416 x 143 to one dataset 54,600 x 11.</p>
+<p><strong>Transformation</strong></p>
+<p>Our data contains different demographic information that were initially imported as “character” class type. In order to correctly process and visualize the different groups, we transformed these into factors. As we ensured that ordering was respected, if present, we also that the majority of groups did not follow a particular order. See breakdown below of this split:</p>
+<ul>
+<li>Unordered factor(s): State code, State, State name, Status</li>
+<li>Ordered factor(s): Age</li>
+</ul>
 </div>
 <div id="missing-value-analysis" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Missing value analysis<a href="data.html#missing-value-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The data available on the IRS website for our analysis does not include any missing values. Data has been aggregated at a total number of returns levels and organized in a way that no values are missing.</p>
+<p>Initially, we saw an indication of values being imputted with zero, but as the analysis progressed we noticed that these had a legally sound reason for the true value to be zero.</p>
+<p>Below, you can see the landscape of our data for missing values.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /><img src="finalproj_files/figure-html/unnamed-chunk-6-2.png" width="672" /><img src="finalproj_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
 
 </div>
 </div>
