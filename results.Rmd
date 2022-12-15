@@ -49,7 +49,11 @@ percentages <- function(df){
 }
 ```
 
+Migration flow within the United States is driven by several competing forces. Although it is all happening in the same country and it varies from State to State, it also affects Age groups and Income levels differently.
 
+During the 2016-2020 period, we observe the majority of individuals staying within their county.
+
+Based on the chart below, the **most transient group is composed of individuals making between `$1 to $10,000`** as they moved out, moved around, and moved into a different state. Our assumptions are that this could be due to having bigger needs to look for better employment opportunities and they might also have the flexibility to move around more if they do not have stable/long term contracts. On the other hand, **the most stationary group is individuals making `$200,000 or more` per year**. This can be tied to the fact that they might not need to change their primary residence, are comfortable where they live and if desired, they could have the discretionary income to spend time at their second home (i.e. during COVID-19). 
 
 ```{r, echo=FALSE, warning=FALSE}
 #Migration flow 2015-2020 per GTI
@@ -69,11 +73,7 @@ ggplot(df_sum, aes(fill=fct_rev(Status), x=GTI,
   theme_classic() +
   theme(legend.position = "top", legend.title = element_blank())
 ```
-
-Looking at the big picture of migration flow across the United States and for the 2015-2020 period, we observe that the majority of the individuals across all income groups did not move outside of their county. 
-
-It seems that the **most active group is composed of individuals making between `$1 to $10,000`** as they moved out, moved around, and moved into a different state. Our assumptions are that this could be due to having bigger needs to look for better employment opportunities and they might also have the flexibility to move around more if they do not have stable/long term contracts. On the other hand, **the most stationary group is for individuals making more than $200,000 per year**. This can be tied to the fact that they might not need to change their primary residence, are comfortable where they live and if desired, they could have the discretionary income to spend time at their second home (i.e. during COVID-19). 
-
+Comparing the type of migration across age groups reveals insights that are more in line with our previous assumptions. Younger people tend to migrate more than older adults. There seems to be a negative relationship between age and moving. 
 
 ```{r, echo=FALSE, warning=FALSE}
 #Migration flow 2015-2020 per GTI
