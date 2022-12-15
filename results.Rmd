@@ -70,8 +70,6 @@ ggplot(df_sum, aes(fill=fct_rev(Status), x=GTI,
   theme(legend.position = "top", legend.title = element_blank())
 ```
 
-
-
 Looking at the big picture of migration flow across the United States and for the 2015-2020 period, we observe that the majority of the individuals across all income groups did not move outside of their county. 
 
 It seems that the **most active group is composed of individuals making between `$1 to $10,000`** as they moved out, moved around, and moved into a different state. Our assumptions are that this could be due to having bigger needs to look for better employment opportunities and they might also have the flexibility to move around more if they do not have stable/long term contracts. On the other hand, **the most stationary group is for individuals making more than $200,000 per year**. This can be tied to the fact that they might not need to change their primary residence, are comfortable where they live and if desired, they could have the discretionary income to spend time at their second home (i.e. during COVID-19). 
@@ -101,7 +99,7 @@ ggplot(df_sum, aes(fill=Status, x=Age,
 
 
 ```{r, echo=FALSE, warning=FALSE}
-mig_data <- read.csv("df.csv")
+mig_data <- read.csv("migration_data/df.csv")
 mig_data <- mig_data %>% select(-X)
 
 # Combine 
@@ -134,7 +132,7 @@ ggplot(mig_grouped, aes(x = reorder(State_name, desc(Total_returns)), y = Total_
 ```
 
 ```{r, echo=FALSE, warning=FALSE}
-mig_data <- read.csv("df.csv")
+mig_data <- read.csv("migration_data/df.csv")
 mig_data <- mig_data %>% select(-X)
 
 colnames(mig_data)[9] <- "Gross_total_income"
@@ -169,9 +167,14 @@ ggplot(mig_grouped, aes(x = reorder(State_name, desc(Total_returns)), y = Total_
 
 ```
 
+
+
+## Temporal Analysis | Migration by Year
+
+
 ```{r, echo=FALSE, warning=FALSE}
 #We will now read the file
-mig_data <- read.csv("df.csv")
+mig_data <- read.csv("migration_data/df.csv")
 mig_data <- mig_data %>% select(-X)
 
 colnames(mig_data)[9] <- "Gross_total_income"
@@ -207,7 +210,7 @@ ggplot(mig_grouped, aes(x = reorder(State_name, desc(Total_returns)), y = Total_
 
 ```{r, echo=FALSE, warning=FALSE}
 #We will now read the file
-mig_data <- read.csv("df.csv")
+mig_data <- read.csv("migration_data/df.csv")
 
 colnames(mig_data)[9] <- "Gross_total_income"
 
