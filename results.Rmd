@@ -186,44 +186,43 @@ ggplot(mig_grouped, aes(Year, Total_returns, color = State_name)) + geom_line() 
 ```
 
 
-```{r, echo=FALSE, warning=FALSE}
-#We will now read the file
-mig_data <- read.csv("df.csv")
 
-# create a theme for dot plots, which can be reused
-theme_dotplot <- theme_bw(14) +
-  theme(axis.text.y = element_text(size = rel(.75)),
-        axis.ticks.y = element_blank(),
-        axis.title.x = element_text(size = rel(.75)),
-        panel.grid.major.x = element_blank(),
-        panel.grid.major.y = element_line(size = 0.5),
-        panel.grid.minor.x = element_blank())
+<!-- #We will now read the file -->
+<!-- mig_data <- read.csv("df.csv") -->
 
-colnames(mig_data)[9] <- "Gross_total_income"
+<!-- # create a theme for dot plots, which can be reused -->
+<!-- theme_dotplot <- theme_bw(14) + -->
+<!--   theme(axis.text.y = element_text(size = rel(.75)), -->
+<!--         axis.ticks.y = element_blank(), -->
+<!--         axis.title.x = element_text(size = rel(.75)), -->
+<!--         panel.grid.major.x = element_blank(), -->
+<!--         panel.grid.major.y = element_line(size = 0.5), -->
+<!--         panel.grid.minor.x = element_blank()) -->
 
-# Combine 
-mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Year, Status, State_name)]
+<!-- colnames(mig_data)[9] <- "Gross_total_income" -->
 
-# assigning the second column name to a new name
-colnames(mig_grouped)[4] <- "Total_returns"
-colnames(mig_grouped)[3] <- "State_name"
+<!-- # Combine  -->
+<!-- mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Year, Status, State_name)] -->
+
+<!-- # assigning the second column name to a new name -->
+<!-- colnames(mig_grouped)[4] <- "Total_returns" -->
+<!-- colnames(mig_grouped)[3] <- "State_name" -->
 
 
-# Filter plotting data
-status_vec <- c("Inflow", "Outflow", "Same State")
+<!-- # Filter plotting data -->
+<!-- status_vec <- c("Inflow", "Outflow", "Same State") -->
 
-mig_grouped <- mig_grouped %>% 
-  filter(Status %in% status_vec) %>%
-  filter(State_name != "Total US") 
+<!-- mig_grouped <- mig_grouped %>%  -->
+<!--   filter(Status %in% status_vec) %>% -->
+<!--   filter(State_name != "Total US")  -->
 
-ggplot(mig_grouped,
-       aes(Total_returns, fct_reorder2(State_name, Status, Total_returns, .desc = FALSE),
-           color = Status)) +
-  geom_point() + ggtitle("total returns for top 10 states facet by year") + ylab("") +
-  theme_dotplot +
-  facet_wrap(~factor(Year))
+<!-- ggplot(mig_grouped, -->
+<!--        aes(Total_returns, fct_reorder2(State_name, Status, Total_returns, .desc = FALSE), -->
+<!--            color = Status)) + -->
+<!--   geom_point() + ggtitle("total returns for top 10 states facet by year") + ylab("") + -->
+<!--   theme_dotplot + -->
+<!--   facet_wrap(~factor(Year)) -->
 
-```
 
 
 ```{r, echo=FALSE, warning=FALSE}

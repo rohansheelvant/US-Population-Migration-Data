@@ -76,7 +76,13 @@
 <li class="chapter" data-level="2" data-path="proposal.html"><a href="proposal.html"><i class="fa fa-check"></i><b>2</b> Proposal</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="proposal.html"><a href="proposal.html#research-topic"><i class="fa fa-check"></i><b>2.1</b> Research topic</a></li>
-<li class="chapter" data-level="2.2" data-path="proposal.html"><a href="proposal.html#data-availability"><i class="fa fa-check"></i><b>2.2</b> Data availability</a></li>
+<li class="chapter" data-level="2.2" data-path="proposal.html"><a href="proposal.html#data-availability"><i class="fa fa-check"></i><b>2.2</b> Data availability</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="proposal.html"><a href="proposal.html#data-format-and-frequency"><i class="fa fa-check"></i><b>2.2.1</b> Data Format and Frequency</a></li>
+<li class="chapter" data-level="2.2.2" data-path="proposal.html"><a href="proposal.html#scope"><i class="fa fa-check"></i><b>2.2.2</b> Scope</a></li>
+<li class="chapter" data-level="2.2.3" data-path="proposal.html"><a href="proposal.html#data-quality"><i class="fa fa-check"></i><b>2.2.3</b> Data Quality</a></li>
+<li class="chapter" data-level="2.2.4" data-path="proposal.html"><a href="proposal.html#references"><i class="fa fa-check"></i><b>2.2.4</b> References</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
@@ -111,6 +117,40 @@
             <section class="normal" id="section-">
 <div id="results" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Results<a href="results.html#results" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<!-- #We will now read the file -->
+<!-- mig_data <- read.csv("df.csv") -->
+<!-- # create a theme for dot plots, which can be reused -->
+<!-- theme_dotplot <- theme_bw(14) + -->
+<!--   theme(axis.text.y = element_text(size = rel(.75)), -->
+<!--         axis.ticks.y = element_blank(), -->
+<!--         axis.title.x = element_text(size = rel(.75)), -->
+<!--         panel.grid.major.x = element_blank(), -->
+<!--         panel.grid.major.y = element_line(size = 0.5), -->
+<!--         panel.grid.minor.x = element_blank()) -->
+<!-- colnames(mig_data)[9] <- "Gross_total_income" -->
+<!-- # Combine  -->
+<!-- mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Year, Status, State_name)] -->
+<!-- # assigning the second column name to a new name -->
+<!-- colnames(mig_grouped)[4] <- "Total_returns" -->
+<!-- colnames(mig_grouped)[3] <- "State_name" -->
+<!-- # Filter plotting data -->
+<!-- status_vec <- c("Inflow", "Outflow", "Same State") -->
+<!-- mig_grouped <- mig_grouped %>%  -->
+<!--   filter(Status %in% status_vec) %>% -->
+<!--   filter(State_name != "Total US")  -->
+<!-- ggplot(mig_grouped, -->
+<!--        aes(Total_returns, fct_reorder2(State_name, Status, Total_returns, .desc = FALSE), -->
+<!--            color = Status)) + -->
+<!--   geom_point() + ggtitle("total returns for top 10 states facet by year") + ylab("") + -->
+<!--   theme_dotplot + -->
+<!--   facet_wrap(~factor(Year)) -->
+<p><img src="finalproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 
 </div>
             </section>

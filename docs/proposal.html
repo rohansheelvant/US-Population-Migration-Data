@@ -76,7 +76,13 @@
 <li class="chapter" data-level="2" data-path="proposal.html"><a href="proposal.html"><i class="fa fa-check"></i><b>2</b> Proposal</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="proposal.html"><a href="proposal.html#research-topic"><i class="fa fa-check"></i><b>2.1</b> Research topic</a></li>
-<li class="chapter" data-level="2.2" data-path="proposal.html"><a href="proposal.html#data-availability"><i class="fa fa-check"></i><b>2.2</b> Data availability</a></li>
+<li class="chapter" data-level="2.2" data-path="proposal.html"><a href="proposal.html#data-availability"><i class="fa fa-check"></i><b>2.2</b> Data availability</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="proposal.html"><a href="proposal.html#data-format-and-frequency"><i class="fa fa-check"></i><b>2.2.1</b> Data Format and Frequency</a></li>
+<li class="chapter" data-level="2.2.2" data-path="proposal.html"><a href="proposal.html#scope"><i class="fa fa-check"></i><b>2.2.2</b> Scope</a></li>
+<li class="chapter" data-level="2.2.3" data-path="proposal.html"><a href="proposal.html#data-quality"><i class="fa fa-check"></i><b>2.2.3</b> Data Quality</a></li>
+<li class="chapter" data-level="2.2.4" data-path="proposal.html"><a href="proposal.html#references"><i class="fa fa-check"></i><b>2.2.4</b> References</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
@@ -126,14 +132,14 @@
 <li>Migrant return - same state - different county,</li>
 <li>Migrant return - foreign</li>
 </ul>
-<div id="data-format-and-frequency" class="section level4 hasAnchor" number="2.2.0.1">
-<h4><span class="header-section-number">2.2.0.1</span> Data Format and Frequency<a href="proposal.html#data-format-and-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="data-format-and-frequency" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Data Format and Frequency<a href="proposal.html#data-format-and-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The data is publicly available as zipped Excel files (.xls) on the IRS website, composing multiple datasets for each fiscal year. To import the data, we need to download these files to our local computers and then upload to RStudio, which is the software we will use to conduct the analysis.</p>
 <p>The IRS leverages the change in address on the Tax return from one year to another year to generate the migration data.
 Despite the fact that the IRS provides help services for individuals and businesses looking at their tax returns, there is no contact information for data-related issues. As we encounter questions about the data, our approach will be to explore the online resources available on their website.</p>
 </div>
-<div id="scope" class="section level4 hasAnchor" number="2.2.0.2">
-<h4><span class="header-section-number">2.2.0.2</span> Scope<a href="proposal.html#scope" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="scope" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Scope<a href="proposal.html#scope" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The primary data that we will be analyzing is the summary of the migration flows within the states for 5 years from 2015 to 2020. This data contains the following fields:</p>
 <ul>
 <li>The number of returns: which indicates the number of households that migrated.</li>
@@ -152,14 +158,14 @@ Despite the fact that the IRS provides help services for individuals and busines
 <li>Adjusted Gross income: which indicates the gross income after deducting certain adjustments like dividends, interests, etc..</li>
 </ul>
 </div>
-<div id="data-quality" class="section level4 hasAnchor" number="2.2.0.3">
-<h4><span class="header-section-number">2.2.0.3</span> Data Quality<a href="proposal.html#data-quality" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="data-quality" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Data Quality<a href="proposal.html#data-quality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It is important to note that the data does not represent the entire US population because there can be several individuals who might not be filing tax returns despite having an income.</p>
 <p>Tax returns that are filled without a state code or with an incorrect state code are excluded. Similarly, if someone filed their tax return after September of a given year, it will not be included to maintain uniformity. Returns received in 2019 indicate the income earned in 2018, and returns received in 2020 indicate the income that was earned in 2019, and so on.</p>
 <p>The migration data cannot be compared to other data that relates to sources of income (SOI) because the migration data only compares the tax returns for 2 consecutive years.</p>
 </div>
-<div id="references" class="section level4 hasAnchor" number="2.2.0.4">
-<h4><span class="header-section-number">2.2.0.4</span> References<a href="proposal.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="references" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> References<a href="proposal.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>(<a href="https://www.irs.gov/about-irs/the-agency-its-mission-and-statutory-authority" class="uri">https://www.irs.gov/about-irs/the-agency-its-mission-and-statutory-authority</a>)
 (<a href="https://www.irs.gov/statistics/soi-tax-stats-data-by-geographic-area" class="uri">https://www.irs.gov/statistics/soi-tax-stats-data-by-geographic-area</a>)
 (<a href="https://www.irs.gov/statistics/soi-tax-stats-migration-data" class="uri">https://www.irs.gov/statistics/soi-tax-stats-migration-data</a>)
