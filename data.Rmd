@@ -35,7 +35,7 @@ library(vcdExtra)
 library(ggalluvial)
 ```
 
-```{r}
+```{r, echo=FALSE, warning=FALSE}
 df <- read.csv("~/Desktop/Fall 2022/EDA/migration.csv")
 df <- df %>% filter(State_name!='Total US', Status!='Total') %>% select(-State_code)
 
@@ -59,7 +59,7 @@ Initially, we saw an indication of values being imputted with zero, but as the a
 
 Below, you can see the landscape of our data for missing values. 
 
-```{r}
+```{r, echo=FALSE, warning=FALSE}
 #No missing values in the data, visualizations showing this:
 gg_miss_var(df) + labs(y = "Number of Missing Values") + ylim(0,5) 
 
