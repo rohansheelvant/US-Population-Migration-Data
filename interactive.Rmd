@@ -1,4 +1,4 @@
-#Interactvive component
+# Interactvive component
 
 <iframe src="migration_d3.html" width="700" height="400"></iframe>
 
