@@ -4,12 +4,101 @@
 # install.packages("datasets")
 # install.packages("ggplot2")
 # install.packages("dplyr")
+# install.packages("mi")
+# install.packages("naniar")
+# install.packages("vcdExtra")
+#install.packages("ggalluvial")
 library(datasets) 
 library(ggplot2) 
 library(dplyr) 
 library(data.table)
 library(tidyverse)
+library(mi)
+library(magrittr)
+library(plyr)
+library(naniar)
+library(vcdExtra)
+library(ggalluvial)
 ```
+
+## Migration of Individuals
+
+```{r, echo=FALSE, warning=FALSE}
+df <- read.csv("migration_data/df_preprocessed.csv")
+
+#Convert to groups/unordered factors
+factors_unordered <- c("Status", "State", "State_name")
+
+for (i in factors_unordered){
+    df[, i] <- as.factor(df[, i])
+}
+
+##Convert age groups to an ordered factor
+factors_ordered <- unique(df[,"Age"])
+
+df[,"Age"] <- factor(df[,"Age"], ordered=TRUE, levels=c("under 26", "26 under 35", "35 under 45","45 under 55","55 under 65", "65 and over"))
+
+df[,"GTI"] <- factor(df[,"GTI"], ordered=TRUE, levels=c("$1 under $10,000", "$10,000 under $25,000", "$25,000 under $50,000", "$50,000 under $75,000", "$75,000 under $100,000", "$100,000 under $200,000", "$200,000 or more"))
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+percentages <- function(df){
+  df$ind_perc <- (df$Individuals/sum(df$Individuals))
+  return(df)
+}
+```
+
+
+
+```{r, echo=FALSE, warning=FALSE}
+#Migration flow 2015-2020 per GTI
+df_sum <- ddply(df[,c("GTI", "Status", "Individuals")], .(GTI), percentages)
+
+df_sum <- as.data.table(df_sum)[, sum(ind_perc), by = .(GTI, Status)]
+
+
+ggplot(df_sum, aes(fill=fct_rev(Status), x=GTI,
+                         y=V1)) +
+  geom_col(position = "fill", alpha = .75) +
+  ylab("Migration Status") +
+  ggtitle('Migration Status per Gross Total Income 2015-2020') +
+  xlab('Gross Total Income') +
+  coord_flip() +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  theme_classic() +
+  theme(legend.position = "top", legend.title = element_blank())
+```
+
+
+
+Looking at the big picture of migration flow across the United States and for the 2015-2020 period, we observe that the majority of the individuals across all income groups did not move outside of their county. 
+
+It seems that the **most active group is composed of individuals making between `$1 to $10,000`** as they moved out, moved around, and moved into a different state. Our assumptions are that this could be due to having bigger needs to look for better employment opportunities and they might also have the flexibility to move around more if they do not have stable/long term contracts. On the other hand, **the most stationary group is for individuals making more than $200,000 per year**. This can be tied to the fact that they might not need to change their primary residence, are comfortable where they live and if desired, they could have the discretionary income to spend time at their second home (i.e. during COVID-19). 
+
+
+```{r, echo=FALSE, warning=FALSE}
+#Migration flow 2015-2020 per GTI
+df_sum <- ddply(df[,c("Individuals", "Status","Age")], .(Age), percentages)
+
+df_sum <- as.data.table(df_sum)[, sum(ind_perc), by = .(Age, Status)]
+
+ggplot(df_sum, aes(fill=Status, x=Age,
+                         y=V1)) +
+  geom_col(position = "fill", alpha = .75) +
+  ylab('Age Group') +
+  ggtitle('Migration Status by Age 2015-2020') +
+  xlab("Migration Status") +
+  coord_flip() +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  theme_classic() +
+  theme(legend.position = "top", legend.title = element_blank())
+```
+
+
+
+## Number of Tax Returns
+
 
 ```{r, echo=FALSE, warning=FALSE}
 mig_data <- read.csv("df.csv")
