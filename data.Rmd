@@ -36,7 +36,7 @@ library(ggalluvial)
 ```
 
 ```{r, echo=FALSE, warning=FALSE}
-df <- read.csv("df.csv")
+df <- read.csv("migration_data/df.csv")
 df <- df %>% filter(State_name!='Total US', Status!='Total') %>% select(-State_code)
 
 #Convert to groups/unordered factors
