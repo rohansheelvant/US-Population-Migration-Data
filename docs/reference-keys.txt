@@ -11,6 +11,9 @@ sources
 cleaning-transformation
 missing-value-analysis
 results
+migration-of-individuals
+number-of-tax-returns
+temporal-analysis-migration-by-year
 interactive-component
 u.s.-migration-2019-2020
 conclusion
