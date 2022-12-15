@@ -1,1 +1,313 @@
 # Results
+
+```{r, warning = FALSE, results = 'hide', message = FALSE}
+# install.packages("datasets")
+# install.packages("ggplot2")
+# install.packages("dplyr")
+library(datasets) 
+library(ggplot2) 
+library(dplyr) 
+library(data.table)
+library(tidyverse)
+```
+
+```{r, echo=FALSE, warning=FALSE}
+mig_data <- read.csv("df.csv")
+mig_data <- mig_data %>% select(-X)
+
+# Combine 
+mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Age, Status, State_name)]
+
+# assigning the column name to a new name
+colnames(mig_grouped)[4] <- "Total_returns"
+colnames(mig_grouped)[3] <- "State_name"
+
+top_total_states <- c("California", "Texas", "Florida", "New York", "Pennsylvania", "Illinois")
+
+# Filter plotting data
+status_vec <- c("Inflow", "Outflow", "Same State")
+
+mig_grouped <- mig_grouped %>% 
+  filter(Status %in% status_vec) %>%
+  filter(State_name %in% top_total_states)
+
+
+ggplot(mig_grouped, aes(x = reorder(State_name, desc(Total_returns)), y = Total_returns, fill = Status)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~factor(Age, levels=c('under 26', '26 under 35', '35 under 45', '45 under 55', '55 under 65', '65 and over'))) +
+  # formatting
+  ggtitle("State & age wise inflow and outflow comparsion") +
+  labs(y = "Number of Returns", x = "States") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
+  theme(plot.caption = element_text(color = "grey68"))
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+mig_data <- read.csv("df.csv")
+mig_data <- mig_data %>% select(-X)
+
+colnames(mig_data)[9] <- "Gross_total_income"
+
+# Combine
+mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Gross_total_income, Status, State_name)]
+
+
+# assigning the column name to a new name
+colnames(mig_grouped)[4] <- "Total_returns"
+colnames(mig_grouped)[3] <- "State_name"
+
+top_total_states <- c("California", "Texas", "Florida", "New York", "Pennsylvania", "Illinois")
+
+# Filter plotting data
+status_vec <- c("Inflow", "Outflow", "Same State")
+
+mig_grouped <- mig_grouped %>% 
+  filter(Status %in% status_vec) %>%
+  filter(State_name %in% top_total_states)
+
+
+ggplot(mig_grouped, aes(x = reorder(State_name, desc(Total_returns)), y = Total_returns, fill = Status)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~factor(Gross_total_income,  levels=c('$1 under $10,000', '$10,000 under $25,000', '$25,000 under $50,000', '$50,000 under $75,000', '$75,000 under $100,000', '$100,000 under $200,000', '$200,000 or more'))) +
+  # formatting
+  ggtitle("State & Gross Income wise inflow and outflow comparsion") +
+  labs(y = "Number of Returns", x = "States") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
+  theme(plot.caption = element_text(color = "grey68"))
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+#We will now read the file
+mig_data <- read.csv("df.csv")
+mig_data <- mig_data %>% select(-X)
+
+colnames(mig_data)[9] <- "Gross_total_income"
+
+# Combine
+mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Year, Status, State_name)]
+
+# assigning the column name to a new name
+colnames(mig_grouped)[4] <- "Total_returns"
+colnames(mig_grouped)[3] <- "State_name"
+
+top_total_states <- c("California", "Texas", "Florida", "New York", "Pennsylvania", "Illinois")
+
+# Filter plotting data
+status_vec <- c("Inflow", "Outflow", "Same State")
+
+mig_grouped <- mig_grouped %>% 
+  filter(Status %in% status_vec) %>%
+  filter(State_name %in% top_total_states)
+
+
+ggplot(mig_grouped, aes(x = reorder(State_name, desc(Total_returns)), y = Total_returns, fill = Status)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~(Year)) +
+  # formatting
+  ggtitle("State & Year wise inflow and outflow comparsion") +
+  labs(y = "Number of Returns", x = "States") +
+  theme(plot.title = element_text(face = "bold")) +
+  theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
+  theme(plot.caption = element_text(color = "grey68"))
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+#We will now read the file
+mig_data <- read.csv("df.csv")
+
+colnames(mig_data)[9] <- "Gross_total_income"
+
+# Combine
+mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Year, Status, State_name)]
+
+# assigning the second column name to a new name
+colnames(mig_grouped)[4] <- "Total_returns"
+colnames(mig_grouped)[3] <- "State_name"
+
+top_total_states <- c("California", "Texas", "Florida", "New York", "Pennsylvania", "Illinois")
+
+# Filter plotting data
+status_vec <- c("Inflow", "Outflow", "Same State")
+
+mig_grouped <- mig_grouped %>% 
+  filter(Status %in% status_vec) %>%
+  filter(State_name %in% top_total_states) %>%
+  mutate(State_name = forcats::fct_reorder2(State_name, Year, Total_returns))
+
+
+ggplot(mig_grouped, aes(Year, Total_returns, color = State_name)) + geom_line() +
+  ggtitle("Total Returns from 2016 to 2020") +
+  facet_wrap(~factor(Status)) +
+  labs (x = "Year", y = "Total Returns") +
+  theme_grey(16) +
+  theme(legend.title = element_blank())
+
+
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+#We will now read the file
+mig_data <- read.csv("df.csv")
+
+colnames(mig_data)[9] <- "Gross_total_income"
+
+# Combine
+mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Year, Status, State_name)]
+
+# assigning the second column name to a new name
+colnames(mig_grouped)[4] <- "Total_returns"
+colnames(mig_grouped)[3] <- "State_name"
+
+top_total_states <- c("California", "Texas", "Florida", "New York", "Pennsylvania", "Illinois")
+
+# Filter plotting data
+status_vec <- c("Non-migrant" )
+
+mig_grouped <- mig_grouped %>% 
+  filter(Status %in% status_vec) %>%
+  filter(State_name %in% top_total_states) %>%
+  mutate(State_name = forcats::fct_reorder2(State_name, Year, Total_returns))
+
+
+ggplot(mig_grouped, aes(Year, Total_returns, color = State_name)) + geom_line() +
+  ggtitle("Total Returns from 2016 to 2020") +
+  facet_wrap(~factor(Status)) +
+  labs (x = "Year", y = "Total Returns") +
+  theme_grey(16) +
+  theme(legend.title = element_blank())
+
+
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+#We will now read the file
+mig_data <- read.csv("df.csv")
+
+# create a theme for dot plots, which can be reused
+theme_dotplot <- theme_bw(14) +
+  theme(axis.text.y = element_text(size = rel(.75)),
+        axis.ticks.y = element_blank(),
+        axis.title.x = element_text(size = rel(.75)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+
+colnames(mig_data)[9] <- "Gross_total_income"
+
+# Combine 
+mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Year, Status, State_name)]
+
+# assigning the second column name to a new name
+colnames(mig_grouped)[4] <- "Total_returns"
+colnames(mig_grouped)[3] <- "State_name"
+
+
+# Filter plotting data
+status_vec <- c("Inflow", "Outflow", "Same State")
+
+mig_grouped <- mig_grouped %>% 
+  filter(Status %in% status_vec) %>%
+  filter(State_name != "Total US") 
+
+ggplot(mig_grouped,
+       aes(Total_returns, fct_reorder2(State_name, Status, Total_returns, .desc = FALSE),
+           color = Status)) +
+  geom_point() + ggtitle("total returns for top 10 states facet by year") + ylab("") +
+  theme_dotplot +
+  facet_wrap(~factor(Year))
+
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+#We will now read the file
+mig_data <- read.csv("df.csv")
+
+# create a theme for dot plots, which can be reused
+theme_dotplot <- theme_bw(14) +
+  theme(axis.text.y = element_text(size = rel(.75)),
+        axis.ticks.y = element_blank(),
+        axis.title.x = element_text(size = rel(.75)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+
+colnames(mig_data)[9] <- "Gross_total_income"
+
+# Combine 
+mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Status, State_name)]
+
+# assigning the second column name to a new name
+colnames(mig_grouped)[3] <- "Total_returns"
+colnames(mig_grouped)[2] <- "State_name"
+
+
+# Filter plotting data
+status_vec <- c("Inflow", "Outflow", "Same State")
+
+mig_grouped <- mig_grouped %>% 
+  filter(Status %in% status_vec) %>%
+  filter(State_name != "Total US")
+ggplot(mig_grouped,
+       aes(Total_returns, fct_reorder2(State_name, Status, Total_returns, .desc = FALSE),
+           color = Status)) +
+  geom_point() + ggtitle("total returns for top 10 states facet by year") + ylab("") +
+  theme_dotplot 
+
+```
+
+
+
+```{r, echo=FALSE, warning=FALSE}
+#We will now read the file
+mig_data <- read.csv("df.csv")
+
+# create a theme for dot plots, which can be reused
+theme_dotplot <- theme_bw(14) +
+  theme(axis.text.y = element_text(size = rel(.75)),
+        axis.ticks.y = element_blank(),
+        axis.title.x = element_text(size = rel(.75)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+
+colnames(mig_data)[9] <- "Gross_total_income"
+
+# Combine 
+mig_grouped <- as.data.table(mig_data)[, sum(Returns), by = .(Year, Status, State_name)]
+
+# assigning the second column name to a new name
+colnames(mig_grouped)[4] <- "Total_returns"
+colnames(mig_grouped)[3] <- "State_name"
+
+top_total_states <- c("California", "Texas", "Florida", "New York", "Georgia", "Virgina", "Ohio", "North Carolina", "Michigan", "Illinois")
+
+# Filter plotting data
+status_vec <- c("Inflow", "Outflow", "Same State")
+
+mig_grouped <- mig_grouped %>% 
+  filter(Status %in% status_vec) %>%
+  filter(State_name != "Total US") %>%
+  filter(State_name %in% top_total_states)
+
+ggplot(mig_grouped,
+       aes(Total_returns, fct_reorder2(State_name, Status, Total_returns, .desc = FALSE),
+           color = Status)) +
+  geom_point() + ggtitle("total returns for top 10 states facet by year") + ylab("") +
+  theme_dotplot +
+  facet_wrap(~factor(Year))
+
+```
+
+
+
+```{r, echo=FALSE, warning=FALSE}
+
+```
