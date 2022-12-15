@@ -6,6 +6,7 @@ From our key findings, we can see New York as one of the states with the highest
 
 The trend observed on this period is that New York had a bigger outflow of individuals than inflow. With 1/2 million individuals leaving New York, did some of the states bordering New York experienced the opposite? **Can you guess which state had a higher inflow of people versus outflow (if any)?**
 
-Click on the buttons below to find out! 
+
+**Click on the buttons below to find out!**
 
 <iframe src="migration_d3.html" width="800" height="500"></iframe>
