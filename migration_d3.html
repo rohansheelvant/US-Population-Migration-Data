@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>U.S. Migration 2019-2020</title>
+    <script src="https://d3js.org/d3.v7.js"></script>
+  </head>
+
+  <body>
+    <div>
+      <h1>U.S. Migration 2019-2020</h1>
+      <h3>Migration Flow in NY and bordering States during COVID-19</h3>
+      <p>Click on the buttons below to see if any of these states had a higher migration inflow versus outflow.</p>
+      <p>Can you guess which one (if any)?</p>
+    </div>
+    <svg></svg>
+    <p></p>
+    <button type="button" onclick="add()">Outflow (Purple)</button>
+    <button type="button" onclick="remove()">Inflow (Blue)</button>
+
+  <script>
+
+// Create svg and initial bars
+
+  const w = 700;
+  const h = 400;
+  const margin = {top: 25, right: 25, bottom: 25,
+      left: 50};
+  const innerWidth = w - margin.left - margin.right;
+  const innerHeight = h - margin.top - margin.bottom;
+  
+  
+    const svg = d3.select("svg")
+      .attr("width", w)
+      .attr("height", h);
+
+  svg.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", w)
+      .attr("height", h)
+      .attr("fill", "lightblue");
+
+  const bardata = [{state: "NY", value: 228844},
+                 {state: "PA", value: 207143},
+                 {state: "NJ", value: 184825},
+                 {state: "MA", value: 122195},
+                 {state: "CT", value: 89779},
+                 {state: "RI", value: 28538},
+                 {state: "VT", value: 19230}];
+                 
+  const bardata_out = [{state: "NY", value: 474887},
+                 {state: "PA", value: 211909},
+                 {state: "NJ", value: 207766},
+                 {state: "MA", value: 148638},
+                 {state: "CT", value: 86184},
+                 {state: "RI", value: 28416},
+                 {state: "VT", value: 16161}];
+                 
+  const xScale = d3.scaleBand()
+      .domain(bardata_out.map(d => d.state))
+      .range([0, innerWidth])
+      .paddingInner(.1);
+
+  const yScale = d3.scaleLinear()
+      .domain([0, d3.max(bardata_out.map(d => d.value))])
+      .range([innerHeight, 0])
+
+  const xAxis = d3.axisBottom()
+      .scale(xScale);
+
+  const yAxis = d3.axisLeft()
+      .scale(yScale);
+
+
+
+// add background rectangle
+
+  svg.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", w)
+      .attr("height", h)
+      .attr("fill", "aliceblue");
+
+// add bars as a group
+
+  const bars = svg.append("g")
+      .attr("id", "plot")
+      .attr("transform", `translate (${margin.left}, ${margin.top})`)
+    .selectAll("rect")
+      .data(bardata);
+
+  bars.enter().append("rect")
+      .attr("x", d => xScale(d.state))
+      .attr("y", d => yScale(d.value))
+      .attr("width", xScale.bandwidth())
+      .attr("height", d => innerHeight - yScale(d.value))
+      .attr("fill", "lightblue");
+
+// add axes
+
+  svg.append("g")
+      .attr("class", "xAxis")
+      .attr("transform", `translate (${margin.left}, ${h - margin.bottom})`)
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "yAxis")
+      .attr("transform", `translate (${margin.left}, ${margin.top})`)
+      .call(yAxis);
+      
+      
+//Functions for inflow(add) and outflow(remove)
+
+    function add() {
+        const xScale = d3.scaleBand()
+      .domain(bardata.map(d => d.state))
+      .range([0, innerWidth])
+      .paddingInner(.1);
+
+  const yScale = d3.scaleLinear()
+      .domain([0, d3.max(bardata.map(d => d.value))])
+      .range([innerHeight, 0]);
+
+  const xAxis = d3.axisBottom()
+      .scale(xScale);
+
+  const yAxis = d3.axisLeft()
+      .scale(yScale);
+      
+      d3.select("g").selectAll("rect")
+      .transition()
+      .duration(2000)
+      .attr("fill", "purple")
+      .attr("x", d => xScale(d.state))
+      .attr("y", d => yScale(d.value))
+      .attr("width", xScale.bandwidth())
+      .attr("height", d => innerHeight - yScale(d.value));
+      };
+
+
+    function remove() {
+      
+  const xScale = d3.scaleBand()
+      .domain(bardata_out.map(d => d.state))
+      .range([0, innerWidth])
+      .paddingInner(.1);
+
+  const yScale = d3.scaleLinear()
+      .domain([0, d3.max(bardata_out.map(d => d.value))])
+      .range([innerHeight, 0]);
+
+  const xAxis = d3.axisBottom()
+      .scale(xScale);
+
+  const yAxis = d3.axisLeft()
+      .scale(yScale);
+      
+      d3.select("g").selectAll("rect")
+      .transition()
+      .duration(2000)
+      .attr("fill", "lightblue")
+      .attr("x", d => xScale(d.state))
+      .attr("y", d => yScale(d.value))
+      .attr("width", xScale.bandwidth())
+      .attr("height", d => innerHeight - yScale(d.value));
+      };
+
+    </script>
+<p>EDA Project Fall 2022, Group 8 MW</p>
+
+  </body>
+
+</html>
