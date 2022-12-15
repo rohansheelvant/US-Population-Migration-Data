@@ -4,5 +4,81 @@
 
 ## Cleaning / transformation
 
+For this process, we had to change the structure of the data as it was presented as an .xlsx file with different groups under several layers of merged cells. Using the tidy approach of "one variable per column and one observation per row", we turned 143 columns into 11, while keeping the core information intact. 
+
+Excluding demographic data, our dataset had four core columns of information: number of returns, number of individuals, AGI 1 and AGI 2. These were repeated for each each age group and migration flow status combination. Through the data cleaning and transformation process, we created new columns to flag Age and Migration Status, instead of having separate sections of the file for each. This allowed us to append rows horizontally instead of vertically. Similarly, instead of having a different dataset per year, we collapsed these into one by creating a “Year” column into the main dataframe for the 5 years that we will be evaluating. 
+
+The “Total” group was also removed as it was occupying unnecessary space and becoming confusing when extracting summary statistics in R as it would have incorrectly inflated these metrics. We took a similar approach where State was labeled as "Total". 
+
+With these arrangements, the dimensions of our dataframe changed from having 5 datasets 416 x 143 to one dataset 54,600 x 11. 
+
+
+**Transformation**
+
+Our data contains different demographic information that were initially imported as "character" class type. In order to correctly process and visualize the different groups, we transformed these into factors. As we ensured that ordering was respected, if present, we also that the majority of groups did not follow a particular order. See breakdown below of this split:
+
+- Unordered factor(s): State code, State, State name, Status
+- Ordered factor(s): Age 
+
+```{r, warning = FALSE, results = 'hide', message = FALSE}
+# install.packages("mi")
+# install.packages("naniar")
+# install.packages("vcdExtra")
+#install.packages("ggalluvial")
+library(mi)
+library(magrittr)
+library(ggplot2)
+library(dplyr)
+library(plyr)
+library(naniar)
+library(vcdExtra)
+library(ggalluvial)
+```
+
+```{r}
+df <- read.csv("~/Desktop/Fall 2022/EDA/migration.csv")
+df <- df %>% filter(State_name!='Total US', Status!='Total') %>% select(-State_code)
+
+#Convert to groups/unordered factors
+factors_unordered <- c("Status", "State_code", "State", "State_name")
+
+for (i in factors_unordered){
+    df[, i] <- as.factor(df[, i])}
+
+##Convert age groups to an ordered factor
+factors_ordered <- unique(df[,"Age"])
+
+df[,"Age"] <- factor(df[,"Age"], ordered=TRUE, levels=c("under 26", "26 under 35", "35 under 45","45 under 55","55 under 65", "65 and over"))
+```
+
 ## Missing value analysis
+
+The data available on the IRS website for our analysis does not include any missing values. Data has been aggregated at a total number of returns levels and organized in a way that no values are missing.  
+
+Initially, we saw an indication of values being imputted with zero, but as the analysis progressed we noticed that these had a legally sound reason for the true value to be zero. 
+
+Below, you can see the landscape of our data for missing values. 
+
+```{r}
+#No missing values in the data, visualizations showing this:
+gg_miss_var(df) + labs(y = "Number of Missing Values") + ylim(0,5) 
+
+#Status
+gg_miss_fct(x = df, fct = Status) + labs(title="Missing Values per Migrant Status") +
+scale_fill_gradient2(low="lightblue", mid="#4E84C4", high="maroon4", #colors in the scale
+               midpoint=50,    #same midpoint for plots (mean of the range)
+               breaks=seq(0,100,25), #breaks in the scale bar
+               limits=c(0, 100),
+               name='% Missing')
+
+#Year
+gg_miss_fct(x = df, fct = Year) + labs(title="Missing Values per Year")+
+scale_fill_gradient2(low="lightblue", mid="#4E84C4", high="maroon4", #colors in the scale
+               midpoint=50,    #same midpoint for plots (mean of the range)
+               breaks=seq(0,100,25), #breaks in the scale bar
+               limits=c(0, 100),
+               name='% Missing')
+
+
+```
 
