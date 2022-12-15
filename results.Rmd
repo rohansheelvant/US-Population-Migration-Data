@@ -127,7 +127,8 @@ ggplot(mig_grouped, aes(x = reorder(State_name, desc(Total_returns)), y = Total_
   labs(y = "Number of Returns", x = "States") +
   theme(plot.title = element_text(face = "bold")) +
   theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
-  theme(plot.caption = element_text(color = "grey68"))
+  theme(plot.caption = element_text(color = "grey68")) + 
+  theme(axis.text = element_text(size = 4))
 
 ```
 
@@ -163,7 +164,8 @@ ggplot(mig_grouped, aes(x = reorder(State_name, desc(Total_returns)), y = Total_
   labs(y = "Number of Returns", x = "States") +
   theme(plot.title = element_text(face = "bold")) +
   theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
-  theme(plot.caption = element_text(color = "grey68"))
+  theme(plot.caption = element_text(color = "grey68")) + 
+  theme(axis.text = element_text(size = 4))
 
 ```
 
@@ -204,7 +206,9 @@ ggplot(mig_grouped, aes(x = reorder(State_name, desc(Total_returns)), y = Total_
   labs(y = "Number of Returns", x = "States") +
   theme(plot.title = element_text(face = "bold")) +
   theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
-  theme(plot.caption = element_text(color = "grey68"))
+  theme(plot.caption = element_text(color = "grey68"))+ 
+  theme(axis.text = element_text(size = 4))
+
 
 ```
 
@@ -237,7 +241,9 @@ ggplot(mig_grouped, aes(Year, Total_returns, color = State_name)) + geom_line() 
   facet_wrap(~factor(Status)) +
   labs (x = "Year", y = "Total Returns") +
   theme_grey(16) +
-  theme(legend.title = element_blank())
+  theme(legend.title = element_blank())+ 
+  theme(axis.text = element_text(size = 5))
+
 
 
 ```
