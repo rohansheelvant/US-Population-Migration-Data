@@ -40,7 +40,7 @@ df <- read.csv("df.csv")
 df <- df %>% filter(State_name!='Total US', Status!='Total') %>% select(-State_code)
 
 #Convert to groups/unordered factors
-factors_unordered <- c("Status", "State_code", "State", "State_name")
+factors_unordered <- c("Status", "State", "State_name")
 
 for (i in factors_unordered){
     df[, i] <- as.factor(df[, i])}
