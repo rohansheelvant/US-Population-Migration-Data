@@ -2,6 +2,48 @@
 
 ## Sources
 
+As mentioned in the previous chapter the data is made available, collected, and maintained by the Internal Revenue Service (IRS)
+
+The primary source of this migration data is derived from Form 1040 which is filed by residents of the United States of America. The tax return data of an individual are matched based on their Tax Identification Number (TIN). After the matching procedure is completed, these are classified into one of 4 categories :
+
+- Non-migrant returns,
+
+- Migrant return - different state,
+
+- Migrant return - same state - different county,
+
+- Migrant return - foreign
+
+The data file that we chose for our analysis is the master migration file which contains the migration patterns and data for all the states spread over a span of 5 years from 2016 to 2020 over different age groups.
+
+One of the key issues that we faced while interpreting the data was a large number of categorical variables. Age, Income, and Type of migration were all provided as categorical variables and in a very haphazard manner. These variables were organized in a very unorderly manner and it was very difficult to analyze the data belonging to different categories. Hence, we decided to convert the data frame into the tidy data frame format (more details on this are provided in the next section).
+
+The data file which we used for analysis contains the following variables:
+
+- State_code – This column indicates the integer code of the state
+
+- State – This column indicates the name of the state.
+
+- Returns – This variable indicates the number of households that filed their returns
+
+- Individuals – This variable indicates the total number of individuals
+
+- AGI_Year1 / AGI_Year2 – These two variables indicate the average gross income (income after deduction of taxes, dividends, etc) on the 2 returns that are filed which are used to identify the migration status. All the AGI amounts are reported in thousands of dollars.
+
+- Age – This variable indicates the age category of the individual filing the return
+
+- TI – This variable indicates the gross total income of the individual filing the return
+
+- tatus – This variable indicates the migration status of the return
+
+- Year – This variable indicates the year in which the tax return was filed.
+ 
+One anomaly we noticed while exploring the data is that the data collection is not consistent in the state of British Columbia. There were a few returns filed for certain age groups.
+ 
+In addition to the master data file, we also used the state data frame from the maps library. We leveraged this file to obtain the coordinates to plot the various states of the country.
+
+
+
 ## Cleaning / transformation
 
 For this process, we had to change the structure of the data as it was presented as an .xlsx file with different groups under several layers of merged cells. Using the tidy approach of "one variable per column and one observation per row", we turned 143 columns into 11, while keeping the core information intact. 
