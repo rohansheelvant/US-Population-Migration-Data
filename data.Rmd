@@ -32,9 +32,9 @@ The data file which we used for analysis contains the following variables:
 
 - Age – This variable indicates the age category of the individual filing the return
 
-- TI – This variable indicates the gross total income of the individual filing the return
+- GTI – This variable indicates the gross total income of the individual filing the return
 
-- tatus – This variable indicates the migration status of the return
+- Status – This variable indicates the migration status of the return
 
 - Year – This variable indicates the year in which the tax return was filed.
  
