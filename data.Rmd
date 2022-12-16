@@ -38,10 +38,9 @@ The data file which we used for analysis contains the following variables:
 
 - Year – This variable indicates the year in which the tax return was filed.
  
-One anomaly we noticed while exploring the data is that the data collection is not consistent in the state of British Columbia. There were a few returns filed for certain age groups.
+One anomaly we noticed while exploring the data is that the data collection is not consistent in District of Columbia (D.C). There were a few returns filed for certain age groups. On the same note, because D.C. does not have any counties, the values for in-state migration are equivalent to zero. 
  
 In addition to the master data file, we also used the state data frame from the maps library. We leveraged this file to obtain the coordinates to plot the various states of the country.
-
 
 
 ## Cleaning / transformation
