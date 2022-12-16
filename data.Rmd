@@ -2,7 +2,7 @@
 
 ## Sources
 
-As mentioned in the previous chapter the data is made available, collected, and maintained by the Internal Revenue Service (IRS)
+As mentioned in the previous chapter the data is made available, collected, and maintained by the Internal Revenue Service (IRS).
 
 The primary source of this migration data is derived from Form 1040 which is filed by residents of the United States of America. The tax return data of an individual are matched based on their Tax Identification Number (TIN). After the matching procedure is completed, these are classified into one of 4 categories :
 
