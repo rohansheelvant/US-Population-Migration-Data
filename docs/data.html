@@ -124,7 +124,7 @@
 <h1><span class="header-section-number">Chapter 3</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="sources" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Sources<a href="data.html#sources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As mentioned in the previous chapter the data is made available, collected, and maintained by the Internal Revenue Service (IRS)</p>
+<p>As mentioned in the previous chapter the data is made available, collected, and maintained by the Internal Revenue Service (IRS).</p>
 <p>The primary source of this migration data is derived from Form 1040 which is filed by residents of the United States of America. The tax return data of an individual are matched based on their Tax Identification Number (TIN). After the matching procedure is completed, these are classified into one of 4 categories :</p>
 <ul>
 <li><p>Non-migrant returns,</p></li>
@@ -142,11 +142,11 @@
 <li><p>Individuals – This variable indicates the total number of individuals</p></li>
 <li><p>AGI_Year1 / AGI_Year2 – These two variables indicate the average gross income (income after deduction of taxes, dividends, etc) on the 2 returns that are filed which are used to identify the migration status. All the AGI amounts are reported in thousands of dollars.</p></li>
 <li><p>Age – This variable indicates the age category of the individual filing the return</p></li>
-<li><p>TI – This variable indicates the gross total income of the individual filing the return</p></li>
-<li><p>tatus – This variable indicates the migration status of the return</p></li>
+<li><p>GTI – This variable indicates the gross total income of the individual filing the return</p></li>
+<li><p>Status – This variable indicates the migration status of the return</p></li>
 <li><p>Year – This variable indicates the year in which the tax return was filed.</p></li>
 </ul>
-<p>One anomaly we noticed while exploring the data is that the data collection is not consistent in the state of British Columbia. There were a few returns filed for certain age groups.</p>
+<p>One anomaly we noticed while exploring the data is that the data collection is not consistent in District of Columbia (D.C). There were a few returns filed for certain age groups. On the same note, because D.C. does not have any counties, the values for in-state migration are equivalent to zero.</p>
 <p>In addition to the master data file, we also used the state data frame from the maps library. We leveraged this file to obtain the coordinates to plot the various states of the country.</p>
 </div>
 <div id="cleaning-transformation" class="section level2 hasAnchor" number="3.2">
